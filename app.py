@@ -25,13 +25,17 @@ with st.expander(
         'IDE' stands for 'integrated development environment', and it's kind of to writing code what 
         Microsoft Word is to word processing: software to do a task, with some handy tools. Just like word processing,
         different IDEs have different features and vibes; and just like word processing, there are online versions 
-        available.
+        available. [There's a nice, short round-up of what they do and why people use them from the BBC here](https://www.bbc.co.uk/bitesize/guides/zc8pjty/revision/4).
         
         I quite like JupyterLab, which you can try for free here: https://jupyter.org/try-jupyter/lab/. The advantage of
          an online IDE is that you don't have to worry about downloading software and the coding language etc, things 
         which can be a pain if you're just starting out coding.
         
-        Another popular online option is Google Colab, and a popular downloadable IDE is Pycharm (there's a free 
+        Another popular online option is [Google Colab](https://colab.research.google.com/), which uses 'notebook' 
+        format exclusively. Notebooks let you write and run code in individual cells. JupyterLab offers both notebooks 
+        and traditional 'code in a file' formats. (I hope to write a section on all of this at a later date).
+        
+        A popular downloadable IDE for Python is [Pycharm](https://www.jetbrains.com/pycharm/) (there's a free 
         Community Version as well as their paid version which has some specialist features) 
         """
     )
@@ -39,7 +43,7 @@ with st.expander(
     st.subheader("Getting free FBref data")
     st.write(
         """
-        Every table on FBref (https://fbref.com/en/) has an option to its top left, 'Share & Export'. Selecting 
+        Every table on [FBref](https://fbref.com/en/) has an option to its top left, 'Share & Export'. Selecting 
         'Get table as CSV' changes the table into text data that you can copy and paste into Microsoft Excel or another 
         spreadsheet software. There should be an option in that software to turn text into data, and when you get to 
         'delimiter' options you'll want to split the rows on commas. Save that, load it to wherever you want to work, 
@@ -66,8 +70,8 @@ dataframe = pd.read_csv('fbref_player_data.csv', header=[0,1])
 )
 st.markdown(
     """
-    This imports a helpful coding package, `pandas`, and uses it to save the CSV data to a variable called 
-    `dataframe`. It'd give you something that looks like this:
+    This imports a helpful coding package, `pandas`, ([you can find pandas' documentation here](https://pandas.pydata.org/docs/user_guide/index.html))
+    and uses it to save the CSV data to a variable called `dataframe`. It'd give you something that looks like this:
     """
 )
 
