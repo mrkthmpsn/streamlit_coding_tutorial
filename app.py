@@ -186,11 +186,12 @@ young_ballers_df["goal_cont_90"] = (
 )
 st.write(
     """
-    We're going to create a new dataframe and do something different with it. Players all play different amounts 
-    of time, particularly young players with promising futures. We're going to take the goals and assists figures 
-    and calculate the values 'per 90 minutes'.  
+    Players all play different amounts of time, especially young players with promising futures. We're going to take 
+    the goals and assists figures and calculate the values 'per 90 minutes'. The original CSV has this data in one of 
+    its columns but let's create it ourselves. Afterwards we'll filter the data on player age.
     
-    The original CSV has this data in one of its columns but let's create it ourselves.
+    We're going to call the new dataframe `young_ballers_df` even though, at first, it isn't. Variable names should 
+    generally be descriptive of what the variable is without being excessively long. 
     """
 )
 st.code(
@@ -202,10 +203,11 @@ young_ballers_df['goal_cont_90'] = young_ballers_df['Performance G+A'] / young_b
 )
 st.write(
     """
-    We're also going to filter on the players' ages. The data that we have has an 'Age' column, but that columns 
-    isn't in an immediately helpful format to work with, so let's use the 'Born' column instead. Choose the year 
-    that you want your new dataframe to start with, and players born in that year or after will be the ones left in 
-    the data.
+    Now to make `young_ballers_df` into `young_ballers_df` we need to actually filter on player ages. 
+    
+    The data that we have has an 'Age' column, but that column isn't in an immediately helpful format to work with, 
+    so let's use the 'Born' column instead. Choose the year that you want your new dataframe to start with, and 
+    players born in that year or after will be the ones left in the data.
     """
 )
 
