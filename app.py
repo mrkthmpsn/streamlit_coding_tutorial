@@ -284,16 +284,21 @@ with st.expander("CSV and full code"):
     )
     st.code(
         """
+        # Import 
         import pandas as pd
+
+# Load the CSV into a dataframe and clean it up a little 
 dataframe = pd.read_csv('fbref_player_data.csv', header=[0,1])
 dataframe.columns = [f"{colname_1} {colname_2}" if 'Unnamed' not in colname_1 else colname_2 for colname_1, colname_2 in dataframe.columns]
 dataframe = dataframe.drop(['Rk', 'Matches', '#NAME? -9999'], axis=1)
 
+# Create some new dataframes to take a look at the data in different ways
 new_df = dataframe.copy()
 rearranged_df = new_df[['Player', 'Squad', 'Age', 'Born', 'Playing Time Min', 'Performance G+A']].sort_values('Performance G+A', ascending=False)
 
 temp_filtered_df = rearranged_df[rearranged_df['Performance G+A'] >= 10]
 
+# Create a new dataframe to look at young players and their goal contribution per 90 minutes
 young_ballers_df = new_df[['Player', 'Squad', 'Age', 'Born', 'Playing Time Min', 'Performance G+A']].sort_values('Performance G+A', ascending=False)
 young_ballers_df['nineties_played'] = young_ballers_df['Playing Time Min'] / 90
 young_ballers_df['goal_cont_90'] = young_ballers_df['Performance G+A'] / young_ballers_df['nineties_played']
