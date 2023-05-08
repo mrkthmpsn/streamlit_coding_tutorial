@@ -305,7 +305,7 @@ dataframe = dataframe.drop(columns=['Rk', 'Matches', '#NAME? -9999'])
 new_df = dataframe.copy()
 rearranged_df = new_df[['Player', 'Squad', 'Age', 'Born', 'Playing Time Min', 'Performance G+A']].sort_values('Performance G+A', ascending=False)
 
-temp_filtered_df = rearranged_df[rearranged_df['Performance G+A'] >= 10]
+rearranged_df[rearranged_df['Performance G+A'] >= 10]
 
 # Create a new dataframe to look at young players and their goal contribution per 90 minutes
 young_ballers_df = new_df[['Player', 'Squad', 'Age', 'Born', 'Playing Time Min', 'Performance G+A']].sort_values('Performance G+A', ascending=False)
