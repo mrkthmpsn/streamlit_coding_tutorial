@@ -164,12 +164,14 @@ number_filter = st.number_input("Input a number: ", value=10)
 st.write("Code:")
 st.code(
     f"""
-    temp_filtered_df = rearranged_df[rearranged_df['Performance G+A'] >= {number_filter}]
+    rearranged_df[rearranged_df['Performance G+A'] >= {number_filter}]
     """
 )
-temp_filtered_df = rearranged_df[rearranged_df["Performance G+A"] >= number_filter]
-st.write(f"Number of rows in the filtered dataframe: {len(temp_filtered_df)}")
-st.write(temp_filtered_df)
+
+st.write(
+    f"Number of rows in the filtered dataframe: {len(rearranged_df[rearranged_df['Performance G+A'] >= number_filter])}"
+)
+st.write(rearranged_df[rearranged_df["Performance G+A"] >= number_filter])
 
 st.write("--------------------------------")
 
