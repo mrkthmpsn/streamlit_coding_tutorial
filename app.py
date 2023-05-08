@@ -77,7 +77,8 @@ dataframe.columns = [
     f"{colname_1} {colname_2}" if "Unnamed" not in colname_1 else colname_2
     for colname_1, colname_2 in dataframe.columns
 ]
-dataframe = dataframe.drop(["Rk", "Matches", "#NAME? -9999"], axis=1)
+dataframe = dataframe.drop(columns=["Rk", "Matches", "#NAME? -9999"])
+
 st.write(
     """
     There are actually two column headers for each column here, which is a bit of a pain to deal with, so we can 
@@ -87,7 +88,7 @@ st.write(
 st.code(
     """
 dataframe.columns = [f"{colname_1} {colname_2}" if 'Unnamed' not in colname_1 else colname_2 for colname_1, colname_2 in dataframe.columns]
-dataframe = dataframe.drop(['Rk', 'Matches', '#NAME? -9999'], axis=1)
+dataframe = dataframe.drop(columns=['Rk', 'Matches', '#NAME? -9999'])
     """
 )
 
@@ -290,7 +291,7 @@ with st.expander("CSV and full code"):
 # Load the CSV into a dataframe and clean it up a little 
 dataframe = pd.read_csv('fbref_player_data.csv', header=[0,1])
 dataframe.columns = [f"{colname_1} {colname_2}" if 'Unnamed' not in colname_1 else colname_2 for colname_1, colname_2 in dataframe.columns]
-dataframe = dataframe.drop(['Rk', 'Matches', '#NAME? -9999'], axis=1)
+dataframe = dataframe.drop(columns=['Rk', 'Matches', '#NAME? -9999'])
 
 # Create some new dataframes to take a look at the data in different ways
 new_df = dataframe.copy()
