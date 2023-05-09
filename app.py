@@ -78,40 +78,56 @@ st.markdown(
 st.write(dataframe.head(2))
 
 dataframe.columns = [
-    f"{colname_1} {colname_2}" if "Unnamed" not in colname_1 else colname_2
+    f"{colname_1} {colname_2}".lower().replace(" ", "_")
+    if "Unnamed" not in colname_1
+    else colname_2.lower().replace(" ", "_")
     for colname_1, colname_2 in dataframe.columns
 ]
-dataframe = dataframe.drop(columns=["Rk", "Matches", "#NAME? -9999"])
-
+dataframe = dataframe.drop(columns=["rk", "matches", "#name?_-9999"])
+dataframe
 st.write(
     """
     There are actually two column headers for each column here, which is a bit of a pain to deal with, so we can 
     write over them. There are also a few columns that we definitely won't care about, so we'll remove them too.
+    
+    These two lines of code are going to be difficult to follow for newcomers, but it's a quick way to do a boring job. 
+    There's a full explanation in the expandable section below because they have lots of neat tricks, but if you just 
+    want to run the lines and come back to learning what each bit does at another time, that's perfectly fine.  
     """
 )
 st.code(
     """
-dataframe.columns = [f"{colname_1} {colname_2}" if 'Unnamed' not in colname_1 else colname_2 for colname_1, colname_2 in dataframe.columns]
-dataframe = dataframe.drop(columns=['Rk', 'Matches', '#NAME? -9999'])
+dataframe.columns = [
+    f"{colname_1} {colname_2}".lower().replace(" ", "_")
+    if "Unnamed" not in colname_1
+    else colname_2.lower().replace(" ", "_")
+    for colname_1, colname_2 in dataframe.columns
+]
+dataframe = dataframe.drop(columns=['rk', 'matches', '#name?_-9999'])
     """
 )
 
 with st.expander("More detail on these lines of code"):
     st.markdown(
         """
-        These lines are a bit advanced to throw at the start of a beginner tutorial so it's worth explaining them a 
-        little more. They're not as self-explanatory as the rest of the code in the tutorial but they contain some 
-        useful tricks.
+        There are about three or four time-saving tricks in these two lines of code, although the first thing to 
+        mention is just a regular old function. The `header=[0, 1]` part of `pd.read_csv` is what is telling the 
+        function to use the first two lines of the CSV as the headers. In Python, `0` is the first row, for... 
+        reasons.
         
-        The table above actually has two rows of column headers. That comes from the FBref data, and is enforced in 
-        our code with the `header=[0, 1]` part of `pd.read_csv`. The `dataframe.columns` line then overwrites the 
-        column names of `dataframe` using a Python trick called 'list comprehension'. It does a bit of code `for` each item `in` the list - and in this case, because we have two 
-        column headers, each item is split into two variables, `colname_1`, and `colname_2`.
+        The `dataframe.columns` line then overwrites the column names of `dataframe` using a Python trick called 
+        'list comprehension'. It does a bit of code `for` each item `in` the list - and in this case, because we 
+        have two column headers, each item is split into two variables, `colname_1`, and `colname_2`. ([More on list comprehension here](https://www.w3schools.com/python/python_lists_comprehension.asp)).
         
-        What we're _doing_ with those two temporary variables is really simple, we're just pasting them together. 
+        What we're _doing_ with those two temporary variables is fairly simple, we're just pasting them together. 
         The `f" TEXT "` part of the line is something called an 'f-string' or 'formatted string', and means we can 
         use code _within_ some text, with code occuring between sets of curly brackets. So we're putting `colname_1` 
-        and `colname_2` inside an f-string, separated by a space.
+        and `colname_2` inside an f-string, separated by a space. ([More on f-strings here](https://www.geeksforgeeks.org/formatted-string-literals-f-strings-python/)).
+        
+        After that we're chaining two functions together `.lower()` and `.replace()`. It's a convention in Python to 
+        use 'snake case' to name variables and column names, so `something_like_this`. `.lower()` turns the text 
+        strings into lowercase, and then with `.replace(" ", "_")` we're replacing spaces with underscores. ([More on 
+        method chaining in pandas here](https://towardsdatascience.com/using-pandas-method-chaining-to-improve-code-readability-d8517c5626ac)).  
 
         _But wait, there's more_. Only one thing more. 
 
@@ -123,6 +139,8 @@ with st.expander("More detail on these lines of code"):
         If you put that all together the logic of this line of code is something like: "for every value in the 
         dataframe.columns list, combine the names of colname_1 and colname_2 unless colname_1 is junk, else just use 
         the name of colname_2".   
+        
+        List comprehension, f-strings, chaining functions.
         """
     )
 
@@ -139,8 +157,8 @@ st.write(
 
 new_df = dataframe.copy()
 rearranged_df = new_df[
-    ["Player", "Squad", "Age", "Born", "Playing Time Min", "Performance G+A"]
-].sort_values("Performance G+A", ascending=False)
+    ["player", "squad", "age", "born", "playing_time_min", "performance_g+a"]
+].sort_values("performance_g+a", ascending=False)
 
 st.write(
     """
@@ -152,7 +170,7 @@ st.write(
 st.code(
     """
 new_df = dataframe.copy()
-rearranged_df = new_df[['Player', 'Squad', 'Age', 'Born', 'Playing Time Min', 'Performance G+A']].sort_values('Performance G+A', ascending=False)
+rearranged_df = new_df[['player', 'squad', 'age', 'born', 'playing_time_min', 'performance_g+a']].sort_values('performance_g+a', ascending=False)
     """
 )
 st.write(
@@ -168,25 +186,25 @@ number_filter = st.number_input("Input a number: ", value=10)
 st.write("Code:")
 st.code(
     f"""
-    rearranged_df[rearranged_df['Performance G+A'] >= {number_filter}]
+    rearranged_df[rearranged_df['performance_g+a'] >= {number_filter}]
     """
 )
 
 st.write(
-    f"Number of rows in the filtered dataframe: {len(rearranged_df[rearranged_df['Performance G+A'] >= number_filter])}"
+    f"Number of rows in the filtered dataframe: {len(rearranged_df[rearranged_df['performance_g+a'] >= number_filter])}"
 )
-st.write(rearranged_df[rearranged_df["Performance G+A"] >= number_filter])
+st.write(rearranged_df[rearranged_df["performance_g+a"] >= number_filter])
 
 st.write("--------------------------------")
 
 st.subheader("Creating new data & multi-filtering")
 
 young_ballers_df = new_df[
-    ["Player", "Squad", "Age", "Born", "Playing Time Min", "Performance G+A"]
-].sort_values("Performance G+A", ascending=False)
-young_ballers_df["nineties_played"] = young_ballers_df["Playing Time Min"] / 90
+    ["player", "squad", "age", "born", "playing_time_min", "performance_g+a"]
+].sort_values("performance_g+a", ascending=False)
+young_ballers_df["nineties_played"] = young_ballers_df["playing_time_min"] / 90
 young_ballers_df["goal_cont_90"] = (
-    young_ballers_df["Performance G+A"] / young_ballers_df["nineties_played"]
+    young_ballers_df["performance_g+a"] / young_ballers_df["nineties_played"]
 )
 st.write(
     """
@@ -200,17 +218,17 @@ st.write(
 )
 st.code(
     """
-young_ballers_df = new_df[['Player', 'Squad', 'Age', 'Born', 'Playing Time Min', 'Performance G+A']].sort_values('Performance G+A', ascending=False)
-young_ballers_df['nineties_played'] = young_ballers_df['Playing Time Min'] / 90
-young_ballers_df['goal_cont_90'] = young_ballers_df['Performance G+A'] / young_ballers_df['nineties_played']
+young_ballers_df = new_df[['player', 'squad', 'age', 'born', 'playing_time_min', 'performance_g+a']].sort_values('performance_g+a', ascending=False)
+young_ballers_df['nineties_played'] = young_ballers_df['playing_time_min'] / 90
+young_ballers_df['goal_cont_90'] = young_ballers_df['performance_g+a'] / young_ballers_df['nineties_played']
     """
 )
 st.write(
     """
     Now to make `young_ballers_df` into `young_ballers_df` we need to actually filter on player ages. 
     
-    The data that we have has an 'Age' column, but that column isn't in an immediately helpful format to work with, 
-    so let's use the 'Born' column instead. Choose the year that you want your new dataframe to start with, and 
+    The data that we have has an 'age' column, but that column isn't in an immediately helpful format to work with, 
+    so let's use the 'born' column instead. Choose the year that you want your new dataframe to start with, and 
     players born in that year or after will be the ones left in the data.
     """
 )
@@ -220,11 +238,11 @@ dob_filter = st.number_input("Year of birth filter...", value=2000)
 st.write("Code:")
 st.code(
     f"""
-    young_ballers_df[young_ballers_df['Born'] >= {dob_filter}].sort_values('goal_cont_90', ascending=False)
+    young_ballers_df[young_ballers_df['born'] >= {dob_filter}].sort_values('goal_cont_90', ascending=False)
     """
 )
 st.write(
-    young_ballers_df[young_ballers_df["Born"] >= dob_filter].sort_values(
+    young_ballers_df[young_ballers_df["born"] >= dob_filter].sort_values(
         "goal_cont_90", ascending=False
     )
 )
@@ -243,14 +261,14 @@ nineties_filter = st.number_input(
 )
 
 young_ballers_df = young_ballers_df[
-    (young_ballers_df["Born"] >= new_dob_filter)
+    (young_ballers_df["born"] >= new_dob_filter)
     & (young_ballers_df["nineties_played"] >= nineties_filter)
 ].sort_values("goal_cont_90", ascending=False)
 
 st.write("Code:")
 st.code(
     f"""
-    young_ballers_df = young_ballers_df[(young_ballers_df['Born'] >= {new_dob_filter}) & (young_ballers_df['nineties_played'] >= {nineties_filter})].sort_values('goal_cont_90', ascending=False)
+    young_ballers_df = young_ballers_df[(young_ballers_df['born'] >= {new_dob_filter}) & (young_ballers_df['nineties_played'] >= {nineties_filter})].sort_values('goal_cont_90', ascending=False)
     """
 )
 st.write("The data table itself:")
@@ -293,27 +311,32 @@ with st.expander("CSV and full code"):
     )
     st.code(
         """
-        # Import 
-        import pandas as pd
+# Import pandas 
+import pandas as pd
 
 # Load the CSV into a dataframe and clean it up a little 
 dataframe = pd.read_csv('fbref_player_data.csv', header=[0,1])
-dataframe.columns = [f"{colname_1} {colname_2}" if 'Unnamed' not in colname_1 else colname_2 for colname_1, colname_2 in dataframe.columns]
-dataframe = dataframe.drop(columns=['Rk', 'Matches', '#NAME? -9999'])
+dataframe.columns = [
+    f"{colname_1} {colname_2}".lower().replace(" ", "_")
+    if "Unnamed" not in colname_1
+    else colname_2.lower().replace(" ", "_")
+    for colname_1, colname_2 in dataframe.columns
+]
+dataframe = dataframe.drop(columns=['rk', 'matches', '#name?_-9999'])
 
 # Create some new dataframes to take a look at the data in different ways
 new_df = dataframe.copy()
-rearranged_df = new_df[['Player', 'Squad', 'Age', 'Born', 'Playing Time Min', 'Performance G+A']].sort_values('Performance G+A', ascending=False)
+rearranged_df = new_df[['player', 'squad', 'age', 'born', 'playing_time_min', 'performance_g+a']].sort_values('performance_g+a', ascending=False)
 
-rearranged_df[rearranged_df['Performance G+A'] >= 10]
+rearranged_df[rearranged_df['performance_g+a'] >= 10]
 
 # Create a new dataframe to look at young players and their goal contribution per 90 minutes
-young_ballers_df = new_df[['Player', 'Squad', 'Age', 'Born', 'Playing Time Min', 'Performance G+A']].sort_values('Performance G+A', ascending=False)
-young_ballers_df['nineties_played'] = young_ballers_df['Playing Time Min'] / 90
-young_ballers_df['goal_cont_90'] = young_ballers_df['Performance G+A'] / young_ballers_df['nineties_played']
+young_ballers_df = new_df[['player', 'squad', 'age', 'born', 'playing_time_min', 'performance_g+a']].sort_values('performance_g+a', ascending=False)
+young_ballers_df['nineties_played'] = young_ballers_df['playing_time_min'] / 90
+young_ballers_df['goal_cont_90'] = young_ballers_df['performance_g+a'] / young_ballers_df['nineties_played']
 
-young_ballers_df[young_ballers_df['Born'] >= 2000].sort_values('goal_cont_90', ascending=False)
+young_ballers_df[young_ballers_df['born'] >= 2000].sort_values('goal_cont_90', ascending=False)
 
-young_ballers_df = young_ballers_df[(young_ballers_df['Born'] >= 2000) & (young_ballers_df['nineties_played'] >= 5.0)].sort_values('goal_cont_90', ascending=False)
+young_ballers_df = young_ballers_df[(young_ballers_df['born'] >= 2000) & (young_ballers_df['nineties_played'] >= 5.0)].sort_values('goal_cont_90', ascending=False)
         """
     )
