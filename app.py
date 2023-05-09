@@ -84,7 +84,7 @@ dataframe.columns = [
     for colname_1, colname_2 in dataframe.columns
 ]
 dataframe = dataframe.drop(columns=["rk", "matches", "#name?_-9999"])
-dataframe
+
 st.write(
     """
     There are actually two column headers for each column here, which is a bit of a pain to deal with, so we can 
