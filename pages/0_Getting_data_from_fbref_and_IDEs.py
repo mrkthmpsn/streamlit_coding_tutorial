@@ -1,6 +1,8 @@
 import streamlit as st
 from PIL import Image
 
+# TODO: Add in a 'why Python?' thing?
+
 st.title("Getting data from FBref, and where to code")
 
 st.write(

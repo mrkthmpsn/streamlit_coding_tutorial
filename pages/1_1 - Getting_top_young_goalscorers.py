@@ -1,20 +1,34 @@
 import pandas as pd
 import streamlit as st
 
-st.title("Intro to coding in Python, using FBref data")
-st.subheader("est. time, 5-10 minutes")
+st.title("Getting top young goalscorers")
+st.subheader("Intro to coding in Python, using FBref data")
+st.write("**est. time, 5-10 minutes**")
+
 st.write(
     """
     This is a short tutorial that'll introduce some foundational skills for coding in Python: loading in data; 
     cleaning data; adding, removing, and filtering data. 
     
-    You can read through the tutorial as you'd read through an article (there are some interactive sections to keep 
-    things from getting too boring) or you can skip to the end to get the code and the CSV that the tutorial is 
-    based on. (All the code at the end will be shown throughout the tutorial as well).
+    There are a few different ways you could read this tutorial:
+    - Read it like you would an article, from start to finish
+    - Read it alongside coding, copying and pasting each line as it comes [where's the CSV mate]
+    - Skip to the end and get the code as an uninterrupted block
     
-    The data comes from FBref (https://fbref.com/en/), a really great site for football stats.
+    Each option is valid. The data comes from FBref (https://fbref.com/en/), a really great site for football stats.
+    
+    You can download the CSV used in the tutorial here:
     """
 )
+
+with open("fbref_player_data.csv", "rb") as file:
+    st.download_button(
+        "CSV file",
+        data=file,
+        file_name="fbref_player_data.csv",
+        mime="text/csv",
+    )
+
 with st.expander(
     "Where/what to use to code in Python & more on getting CSVs from FBref"
 ):
