@@ -29,6 +29,7 @@ with open("fbref_player_data.csv", "rb") as file:
         mime="text/csv",
     )
 
+# TODO: Can just link to the page itself here
 with st.expander(
     "Where/what to use to code in Python & more on getting CSVs from FBref"
 ):
