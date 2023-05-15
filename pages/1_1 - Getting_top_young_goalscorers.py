@@ -27,6 +27,7 @@ with open("fbref_player_data.csv", "rb") as file:
         data=file,
         file_name="fbref_player_data.csv",
         mime="text/csv",
+        key="file downloader 1",
     )
 
 # TODO: Can just link to the page itself here
@@ -313,6 +314,7 @@ with st.expander("CSV and full code"):
             data=file,
             file_name="fbref_player_data.csv",
             mime="text/csv",
+            key="file downloader 2",
         )
 
     st.write(

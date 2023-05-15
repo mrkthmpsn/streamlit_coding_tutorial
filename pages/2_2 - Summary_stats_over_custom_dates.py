@@ -33,6 +33,7 @@ with open("fbref_fixtures_data.csv", "rb") as file:
         data=file,
         file_name="fbref_fixtures_data.csv",
         mime="text/csv",
+        key="file downloader 1",
     )
 
 st.write("--------------------------------")
@@ -376,6 +377,7 @@ with st.expander("CSV and full code here:"):
             data=file,
             file_name="fbref_fixtures_data.csv",
             mime="text/csv",
+            key="file downloader 2",
         )
 
     st.write("And here's the full uninterrupted code")
