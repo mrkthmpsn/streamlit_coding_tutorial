@@ -74,8 +74,10 @@ st.write("--------------------------------")
 st.subheader("Importing & cleaning the data")
 st.write(
     """
-    The following couple of lines gets you started loading in the CSV (if you're coding along elsewhere you might 
-    need to check that your file path is correct if the Python file and CSV are in different folders). 
+    The following couple of lines gets you started loading in the CSV. 
+     
+    If you're coding in an online IDE then there should be a sort of file directory where you can upload the file - 
+    make sure that the csv is in the same part of the directory as the file you're coding in.  
     """
 )
 st.code(
@@ -90,7 +92,7 @@ st.markdown(
     and uses it to save the CSV data to a variable called `dataframe`. It'd give you something that looks like this:
     """
 )
-
+st.code("dataframe.head(2)")
 st.write(dataframe.head(2))
 
 dataframe.columns = [
