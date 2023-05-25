@@ -45,7 +45,7 @@ with st.expander(
         """
     )
 
-with st.expander("Some key coding concepts for beginners"):
+with st.expander("Some key coding jargon and concepts for beginners"):
     st.write(
         """
         This section will go through some key terms and concepts.
