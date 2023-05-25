@@ -30,40 +30,72 @@ with open("fbref_player_data.csv", "rb") as file:
         key="file downloader 1",
     )
 
-# TODO: Can just link to the page itself here
 with st.expander(
     "Where/what to use to code in Python & more on getting CSVs from FBref"
 ):
-    # Explain what an IDE is
-    st.subheader("IDEs (and what an IDE is)")
     st.write(
         """
-        'IDE' stands for 'integrated development environment', and it's kind of to writing code what 
-        Microsoft Word is to word processing: software to do a task, with some handy tools. Just like word processing,
-        different IDEs have different features and vibes; and just like word processing, there are online versions 
-        available. [There's a nice, short round-up of what they do and why people use them from the BBC here](https://www.bbc.co.uk/bitesize/guides/zc8pjty/revision/4).
+        If you're starting out for the first time I suggest reading the page on this site [on the subject of what to 
+        code in and how to turn FBref tables into CSV files](https://mrkthmpsn-streamlit-coding-tutorial-home-wk3wn4.streamlit.app/Getting_data_from_fbref_and_IDEs).
         
-        I quite like JupyterLab, which you can try for free here: https://jupyter.org/try-jupyter/lab/. The advantage of
-         an online IDE is that you don't have to worry about downloading software and the coding language etc, things 
-        which can be a pain if you're just starting out coding.
-        
-        Another popular online option is [Google Colab](https://colab.research.google.com/), which uses 'notebook' 
-        format exclusively. Notebooks let you write and run code in individual cells. JupyterLab offers both notebooks 
-        and traditional 'code in a file' formats. (I hope to write a section on all of this at a later date).
-        
-        A popular downloadable IDE for Python is [Pycharm](https://www.jetbrains.com/pycharm/) (there's a free 
-        Community Version as well as their paid version which has some specialist features) 
+        If you want to try diving straight in, I'd suggest either [Jupyter Lab](https://jupyter.org/try-jupyter/lab/) or
+        [Noteable](https://app.noteable.io) as free online options to code in, and FBref tables all have an option to 
+        get data as a CSV (it turns the table into comma separated text, which you can then turn into a CSV file using a
+        program like Microsoft Excel). 
         """
     )
 
-    st.subheader("Getting free FBref data")
+with st.expander("Some key coding concepts for beginners"):
     st.write(
         """
-        Every table on [FBref](https://fbref.com/en/) has an option to its top left, 'Share & Export'. Selecting 
-        'Get table as CSV' changes the table into text data that you can copy and paste into Microsoft Excel or another 
-        spreadsheet software. There should be an option in that software to turn text into data, and when you get to 
-        'delimiter' options you'll want to split the rows on commas. Save that, load it to wherever you want to work, 
-        and you're away.
+        This section will go through some key terms and concepts.
+        
+        ##### Terms
+        **Variable**: An object that you save to refer to later. This has a lot of different uses, but in early tutorials 
+        the main one will be that it allows us to split up the code, as you'll see later!
+        
+        **'Defining'**: In coding terminology, you 'define' a variable. The following code would define a variable called 
+        'new_variable' with the value of 11: `new_variable = 11`. 
+        
+        **Dataframe**: Basically a table. Often shortened to 'df'.
+        
+        **Function**: A set of code that _does_ something, usually doing it to an input that the function gets provided 
+        with. A function also usually 'returns' an output. Here's a basic function to give you an idea:  
+        """
+    )
+    st.code(
+        """
+        def basic_addition_function(input1, input2):
+    addition_of_inputs = input1 + input2
+    
+    return addition_of_inputs
+        """
+    )
+    st.write(
+        """
+        The early tutorials won't create any new functions, but they will make use of functions from 'packages'.
+        
+        **Package**: A collection of functions, basically. In the olden days you might have had to code a lot of maths 
+        yourself, but nowadays there are commonly-used packages for lots of maths and statistical calculations, as well 
+        as creating charts and tons of other stuff.
+        
+        ##### Concepts
+        **Naming variables**: Names of variables and functions should be as long and descriptive as possible while also 
+        being as short as possible. Variable names in the tutorials on the site will err on the side of overly 
+        descriptive (e.g. `basic_addition_function`!).
+        
+        **Getting an output of a variable**: When writing code, you can simply run the variable name and it will display 
+        what that variable is. Kinda like this:  
+        """
+    )
+    st.code(
+        """
+        # What you run
+variable_1 = 6 * 7
+variable_1
+    
+# What gets output
+42
         """
     )
 

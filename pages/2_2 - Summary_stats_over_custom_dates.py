@@ -12,7 +12,7 @@ st.write(
     """
     This is an early-stage Python tutorial where we'll use [FBref](https://fbref.com/en/) competition results data 
     to learn some coding skills. We're going to rearrange and summarise some data and write code in a way that groups
-    work together to re-run BLAH BLAH BLAH 
+    work together to re-run easily. 
     
     There are a few different ways you could read this tutorial:
     - Read it like you would an article, from start to finish
@@ -34,6 +34,21 @@ with open("fbref_fixtures_data.csv", "rb") as file:
         file_name="fbref_fixtures_data.csv",
         mime="text/csv",
         key="file downloader 1",
+    )
+
+with st.expander(
+    "Where/what to use to code in Python & more on getting CSVs from FBref"
+):
+    st.write(
+        """
+        If you're starting out for the first time I suggest reading the page on this site [on the subject of what to 
+        code in and how to turn FBref tables into CSV files](https://mrkthmpsn-streamlit-coding-tutorial-home-wk3wn4.streamlit.app/Getting_data_from_fbref_and_IDEs).
+        
+        If you want to try diving straight in, I'd suggest either [Jupyter Lab](https://jupyter.org/try-jupyter/lab/) or
+        [Noteable](https://app.noteable.io) as free online options to code in, and FBref tables all have an option to 
+        get data as a CSV (it turns the table into comma separated text, which you can then turn into a CSV file using a
+        program like Microsoft Excel). 
+        """
     )
 
 st.write("--------------------------------")
