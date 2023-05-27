@@ -41,6 +41,9 @@ with st.expander(
 ):
     st.write(
         """
+        _Note: As of 27 May I've become aware that the option to get FBref table data as CSVs from the website seems to no
+    longer be available. I'll update if it comes back._
+        
         If you're starting out for the first time I suggest reading the page on this site [on the subject of what to 
         code in and how to turn FBref tables into CSV files](https://mrkthmpsn-streamlit-coding-tutorial-home-wk3wn4.streamlit.app/Getting_data_from_fbref_and_IDEs).
         

@@ -11,7 +11,10 @@ st.write(
     the FBref website provides itself. To save space and time in the tutorials (as people might go back and 
     reference these for the skills learned in the tutorial), this 'get the CSV' part of the process will live here.
     
-    This page will also give some tips for what you can use to actually code in as well. 
+    This page will also give some tips for what you can use to actually code in as well.
+    
+    _Note: As of 27 May I've become aware that the option to get FBref table data as CSVs from the website seems to no
+    longer be available. I'll update if it comes back._ 
     """
 )
 
@@ -160,6 +163,8 @@ st.write("----------------------------------------------------------------")
 st.subheader("Getting CSVs from FBref")
 st.write(
     """
+    _Note: As of 27 May I've become aware that the option to get FBref table data as CSVs from the website seems to no
+    longer be available. I'll update if it comes back._
     'CSV' stands for 'comma separated values' and is a form that data can come in - and, handily, is one which FBref 
     makes their data available in on the website. Here's an example of how to get data from the site into a CSV 
     which you can then use in your coding.
