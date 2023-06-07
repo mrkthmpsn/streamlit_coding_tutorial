@@ -41,16 +41,12 @@ with st.expander(
 ):
     st.write(
         """
-        _Note: As of 27 May I've become aware that the option to get FBref table data as CSVs from the website seems to no
-    longer be available. I'll update if it comes back._
-        
         If you're starting out for the first time I suggest reading the page on this site [on the subject of what to 
         code in and how to turn FBref tables into CSV files](https://mrkthmpsn-streamlit-coding-tutorial-home-wk3wn4.streamlit.app/Getting_data_from_fbref_and_IDEs).
         
         If you want to try diving straight in, I'd suggest either [Jupyter Lab](https://jupyter.org/try-jupyter/lab/) or
-        [Noteable](https://app.noteable.io) as free online options to code in, and FBref tables all have an option to 
-        get data as a CSV (it turns the table into comma separated text, which you can then turn into a CSV file using a
-        program like Microsoft Excel). 
+        [Noteable](https://app.noteable.io) as free online options to code in, and FBref tables can easily be turned 
+        into CSV files via programmes like Microsoft Excel.
         """
     )
 

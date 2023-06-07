@@ -35,16 +35,12 @@ with st.expander(
 ):
     st.write(
         """
-        _Note: As of 27 May I've become aware that the option to get FBref table data as CSVs from the website seems to no
-    longer be available. I'll update if it comes back._
-    
         If you're starting out for the first time I suggest reading the page on this site [on the subject of what to 
         code in and how to turn FBref tables into CSV files](https://mrkthmpsn-streamlit-coding-tutorial-home-wk3wn4.streamlit.app/Getting_data_from_fbref_and_IDEs).
         
         If you want to try diving straight in, I'd suggest either [Jupyter Lab](https://jupyter.org/try-jupyter/lab/) or
-        [Noteable](https://app.noteable.io) as free online options to code in, and FBref tables all have an option to 
-        get data as a CSV (it turns the table into comma separated text, which you can then turn into a CSV file using a
-        program like Microsoft Excel). 
+        [Noteable](https://app.noteable.io) as free online options to code in, and FBref tables can easily be turned 
+        into CSV files via programmes like Microsoft Excel. 
         """
     )
 
@@ -136,16 +132,29 @@ dataframe.columns = [
     else colname_2.lower().replace(" ", "_")
     for colname_1, colname_2 in dataframe.columns
 ]
-dataframe = dataframe.drop(columns=["rk", "matches", "#name?_-9999"])
+
+dataframe = dataframe[dataframe["rk"] != "Rk"]
+
+for column in dataframe.columns:
+    dataframe[column] = (
+        dataframe[column]
+        .str.replace(",", "")
+        .apply(lambda x: pd.to_numeric(x, errors="ignore"))
+    )
+
+dataframe = dataframe.drop(columns=["rk", "matches"])
 
 st.write(
     """
     There are actually two column headers for each column here, which is a bit of a pain to deal with, so we can 
-    write over them. There are also a few columns that we definitely won't care about, so we'll remove them too.
+    write over them. Copying FBref tables also copies annoying text rows which occur every 25 rows, so we have to 
+    remove them and then re-evaluate the type of data that is in each column. Finally, there are also a few columns 
+    that we definitely won't care about, so we'll remove them too.
     
-    These two lines of code are going to be difficult to follow for newcomers, but it's a quick way to do a boring job. 
-    There's a full explanation in the expandable section below because they have lots of neat tricks, but if you just 
-    want to run the lines and come back to learning what each bit does at another time, that's perfectly fine.  
+    These lines of code are going to be difficult to follow for newcomers, but it's a quick way to do a boring job. 
+    There's a full explanation of the first line in the expandable section below because it has lots of neat tricks, 
+    but if you just want to run the lines and come back to learning what each bit does at another time, that's perfectly
+    fine.  
     """
 )
 st.code(
@@ -156,11 +165,17 @@ dataframe.columns = [
     else colname_2.lower().replace(" ", "_")
     for colname_1, colname_2 in dataframe.columns
 ]
-dataframe = dataframe.drop(columns=['rk', 'matches', '#name?_-9999'])
+
+dataframe = dataframe[dataframe['rk'] != 'Rk']
+
+for column in dataframe.columns:
+    dataframe[column] = dataframe[column].str.replace(',', '').apply(lambda x: pd.to_numeric(x, errors = 'ignore'))
+
+dataframe = dataframe.drop(columns=['rk', 'matches'])
     """
 )
 
-with st.expander("More detail on these lines of code"):
+with st.expander("More detail on that first line of code"):
     st.markdown(
         """
         There are about three or four time-saving tricks in these two lines of code, although the first thing to 
@@ -376,7 +391,14 @@ dataframe.columns = [
     else colname_2.lower().replace(" ", "_")
     for colname_1, colname_2 in dataframe.columns
 ]
-dataframe = dataframe.drop(columns=['rk', 'matches', '#name?_-9999'])
+
+dataframe = dataframe[dataframe['rk'] != 'Rk']
+
+for column in dataframe.columns:
+    dataframe[column] = dataframe[column].str.replace(',', '').apply(lambda x: pd.to_numeric(x, errors = 'ignore'))
+
+
+dataframe = dataframe.drop(columns=['rk', 'matches'])
 
 # Create some new dataframes to take a look at the data in different ways
 new_df = dataframe.copy()

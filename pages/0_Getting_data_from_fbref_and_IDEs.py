@@ -7,14 +7,73 @@ st.title("Getting data from FBref, and where to code")
 
 st.write(
     """
-    The tutorials on this site will usually start with taking a CSV of data from FBref, using the tools that 
-    the FBref website provides itself. To save space and time in the tutorials (as people might go back and 
-    reference these for the skills learned in the tutorial), this 'get the CSV' part of the process will live here.
+    The tutorials on this site will usually start with taking a CSV of data from FBref, taken easily and within fair use
+    from FBref itself. To save space and time in the tutorials (as people might go back and reference these for the 
+    skills learned in the tutorial), this 'get the CSV' walk-through will live here.
     
     This page will also give some tips for what you can use to actually code in as well.
+    """
+)
+
+st.write("----------------------------------------------------------------")
+
+st.subheader("Getting CSVs from FBref")
+st.write(
+    """
+    'CSV' stands for 'comma separated values' and is a type of file that is nice to use for coding. Here's an example of
+    how to get data from FBref into a CSV which you can then use in your coding.
     
-    _Note: As of 27 May I've become aware that the option to get FBref table data as CSVs from the website seems to no
-    longer be available. I'll update if it comes back._ 
+    For this example, we're heading for the player season stats for the Premier League 2022/23 season. Hover over 
+    'Squad & Player Stats' for the player data and click 'Standard Stats'.
+    """
+)
+
+st.image(Image.open("images/fbref/Find player standard stats.png"))
+
+st.write(
+    """
+    At the top of the 'Standard Stats' page there'll be a table of team data, and once you scroll past that you'll 
+    get to the player data. 
+    
+    Start from the very top left of the table, in the grey cell above where it says 'Rk', and 
+    highlight the whole thing. If it helps, you can begin highlighting, then scroll down the page, then hold shift as 
+    you re-click the mouse and continue highlighting in the conventional way. You want everything to be in yellow.
+    """
+)
+
+st.image(Image.open("images/fbref/copy table noncsv.png"))
+
+st.write(
+    """
+    Copy that selection and paste it into Microsoft Excel or other spreadsheet software. 
+    
+    You'll then want to unmerge some cells on the top row _if_ the table you selected had the kind of header columns 
+    that span multiple columns. This example does, e.g. 'Playing Time', 'Performance'. If there aren't any merged 
+    columns then you can skip this step, of course.
+    """
+)
+
+st.image(Image.open("images/fbref/unmerge cells in excel.png"))
+
+st.write(
+    """
+    If you have this kind of table where there are two levels of column headers, you will then want to copy across the 
+    primary (top) headers to their right until they fill in the gaps. Basically, you need each column to know what its
+    primary header is, and instead of merged cells (like the FBref website and Excel spreadsheets have) you need to have 
+    that data on each column specifically. You can leave cells blank if there was no primary header for that column. 
+    """
+)
+
+st.image(Image.open("images/fbref/repeated primary headers.png"))
+
+st.write(
+    """
+    When that's done, save the file as a CSV, and there you go! Ready to read into some Python code. It's best to save 
+    it in a file location which is easy to remember, to save you going 'oh where did I put this?' when writing the file 
+    import code. 
+    
+    This whole process might be a bit of a pain if you're new to working with things like CSV data, but it's 
+    repeatable and lets you focus your energy on learning to code rather than learning to import data. 
     """
 )
 
@@ -157,79 +216,3 @@ pd.read_csv('your_csv_file.csv')
         one of the notebook) is SHIFT+ENTER.
         """
     )
-
-st.write("----------------------------------------------------------------")
-
-st.subheader("Getting CSVs from FBref")
-st.write(
-    """
-    _Note: As of 27 May I've become aware that the option to get FBref table data as CSVs from the website seems to no
-    longer be available. I'll update if it comes back._
-    'CSV' stands for 'comma separated values' and is a form that data can come in - and, handily, is one which FBref 
-    makes their data available in on the website. Here's an example of how to get data from the site into a CSV 
-    which you can then use in your coding.
-    
-    For this example, we're heading for the player season stats for the Premier League 2022/23 season. Hover over 
-    'Squad & Player Stats' for the player data and click 'Standard Stats'.
-    """
-)
-
-st.image(Image.open("images/fbref/Find player standard stats.png"))
-
-st.write(
-    """
-    At the top of the 'Standard Stats' page there'll be a table of team data, and once you scroll past that you'll 
-    get to the player data. Hover over the 'Share & Export' option. 
-    """
-)
-
-st.image(Image.open("images/fbref/save as csv.png"))
-
-st.write(
-    """
-    Clicking the 'Get table as CSV' option will turn the table into something like this:
-    """
-)
-
-st.image(Image.open("images/fbref/a wild comma separated values appeared.png"))
-
-st.write(
-    """
-    The easiest way that I know to select all of this data is to start off by highlighting the first part of it, 
-    then scroll all the way down the page to the end. Hold the shift key and click at the end of the data - if you 
-    need to you can keeping holding shift and use the arrow keys to get the selection exactly right. It should look 
-    like this:
-    """
-)
-
-st.image(Image.open("images/fbref/highlight EVERYTHING.png"))
-
-st.write(
-    """
-    Copy that selection and paste it in Microsoft Excel or other spreadsheet software. There should be an option 
-    in the software to convert text to columns of data (in Excel it's under 'Text to Columns' in the 'Data' tab; 
-    NUMBERS APPLE)
-    """
-)
-
-st.image(Image.open("images/fbref/pasting into excel.png"))
-
-st.write(
-    """
-    The process may differ between software, but you'll want to look out for any option that separates on certain 
-    characters, and when you get the chance to choose which character to separate on you'll want to select commas.
-    """
-)
-
-st.image(Image.open("images/fbref/text to columns.png"))
-
-st.write(
-    """
-    When that's done, save the file as a CSV, and there you go! Ready to read into some Python code. Best to save it 
-    in a file location which is easy to remember to save you going 'oh where did I put this?' when writing the file 
-    import code. 
-    
-    This whole process might be a bit of a pain if you're new to working with things like CSV data, but it's 
-    repeatable and lets you focus your energy on learning to code rather than learning to import data. 
-    """
-)
